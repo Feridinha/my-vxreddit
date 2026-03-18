@@ -3,6 +3,7 @@ from urllib.parse import quote
 
 def fixUrlForDiscord(url):
     # convert url to base64
+    return url;
     url = base64.b64encode(url.encode()).decode()
     # url encode
     url = quote(url,safe='')

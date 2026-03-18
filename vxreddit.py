@@ -227,12 +227,12 @@ def embed_reddit(post_link,isDiscordBot=False):
     if videoInfo["post_type"] == "unknown":
         return message("Unknown post type")
     elif videoInfo["post_type"] == "text" or videoInfo["post_type"] == "link":
-        return render_template("text.html", vxData=videoInfo,appname=config.currentConfig["MAIN"]["appName"], statsLine=statsLine, domainName=config.currentConfig["MAIN"]["domainName"])
+        return render_template("text.html", vxData=videoInfo,appname=config.currentConfig["MAIN"]["appName"], statsLine=statsLine, domainName=config.currentConfig["MAIN"]["domainName"], urlProtocol=config.currentConfig["MAIN"]["urlProtocol"])
     elif videoInfo["post_type"] == "image":
-        return render_template("image.html", vxData=videoInfo,appname=config.currentConfig["MAIN"]["appName"], statsLine=statsLine, domainName=config.currentConfig["MAIN"]["domainName"])
+        return render_template("image.html", vxData=videoInfo,appname=config.currentConfig["MAIN"]["appName"], statsLine=statsLine, domainName=config.currentConfig["MAIN"]["domainName"], urlProtocol=config.currentConfig["MAIN"]["urlProtocol"])
     elif videoInfo["post_type"] == "gallery":
         imageCount = str(len(videoInfo["images"]))
-        return render_template("image.html", vxData=videoInfo,appname=config.currentConfig["MAIN"]["appName"]+" - Gallery with "+imageCount+" image(s)", statsLine=statsLine, domainName=config.currentConfig["MAIN"]["domainName"])
+        return render_template("image.html", vxData=videoInfo,appname=config.currentConfig["MAIN"]["appName"]+" - Gallery with "+imageCount+" image(s)", statsLine=statsLine, domainName=config.currentConfig["MAIN"]["domainName"], urlProtocol=config.currentConfig["MAIN"]["urlProtocol"])
     #elif videoInfo["post_type"] == "link":
     #    return redirect(videoInfo["link_url"]) # this might need to be improved later
     elif videoInfo["post_type"] == "video":
@@ -241,10 +241,10 @@ def embed_reddit(post_link,isDiscordBot=False):
         else:
             encodedVideoURL = urllib.parse.quote(videoInfo["video_url"], safe='')
             encodedAudioURL = urllib.parse.quote(videoInfo["audio_url"], safe='')
-            convertedUrl = "https://"+config.currentConfig["MAIN"]["domainName"]+"/redditvideo.mp4?video_url="+encodedVideoURL+"&audio_url="+encodedAudioURL
+            convertedUrl = config.currentConfig["MAIN"]["urlProtocol"]+config.currentConfig["MAIN"]["domainName"]+"/redditvideo.mp4?video_url="+encodedVideoURL+"&audio_url="+encodedAudioURL
         if isDiscordBot:
             convertedUrl = fixUrlForDiscord(convertedUrl)
-        return render_template("video.html", vxData=videoInfo,appname=config.currentConfig["MAIN"]["appName"], statsLine=statsLine, domainName=config.currentConfig["MAIN"]["domainName"],mp4URL=convertedUrl)
+        return render_template("video.html", vxData=videoInfo,appname=config.currentConfig["MAIN"]["appName"], statsLine=statsLine, domainName=config.currentConfig["MAIN"]["domainName"], urlProtocol=config.currentConfig["MAIN"]["urlProtocol"], mp4URL=convertedUrl)
     else:
         return videoInfo
 
