@@ -1,3 +1,6 @@
+A 'fork' of https://github.com/dylanpdx/vxReddit but it works on localhost and has a few tweaks for a personal project of mine. 
+
+# Original README:
 # vxreddit
 Basic website that serves Reddit posts with actual working embeds to various platforms (Discord, Telegram, etc.) by using Reddit's API.
 
